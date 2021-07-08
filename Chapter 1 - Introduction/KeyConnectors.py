@@ -57,3 +57,30 @@ print("Users with most friends:")
 print(usersWithMostFriends)
 print()
 
+#Data Scientists You May Know
+friendsOfFriends = {}
+for k, v in friendships.items():
+    mutuals = []
+    for friend in v:
+        mutuals += friendships[friend]
+    mutuals = list(set(mutuals))
+    mutuals.remove(k)
+    for each in v:
+        try:
+            mutuals.remove(each)
+        except:
+            pass
+    friendsOfFriends[k] = mutuals
+
+print("Data Scientists You May Know:")    
+print(friendsOfFriends)
+print()
+
+# Count of Mutuals
+def countOfMutuals(f1, f2):
+    lst1 = friendships[f1]
+    lst2 = friendships[f2]
+    return len(list(set(lst1) & set(lst2)))
+print (countOfMutuals(1,2))
+
+
