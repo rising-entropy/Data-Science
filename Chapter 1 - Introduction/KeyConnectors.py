@@ -81,6 +81,60 @@ def countOfMutuals(f1, f2):
     lst1 = friendships[f1]
     lst2 = friendships[f2]
     return len(list(set(lst1) & set(lst2)))
-print (countOfMutuals(1,2))
+# print (countOfMutuals(1,2))
 
+interests = [
+(0, "Hadoop"), (0, "Big Data"), (0, "HBase"), (0, "Java"),
+(0, "Spark"), (0, "Storm"), (0, "Cassandra"),
+(1, "NoSQL"), (1, "MongoDB"), (1, "Cassandra"), (1, "HBase"),
+(1, "Postgres"), (2, "Python"), (2, "scikit-learn"), (2, "scipy"),
+(2, "numpy"), (2, "statsmodels"), (2, "pandas"), (3, "R"), (3, "Python"),
+(3, "statistics"), (3, "regression"), (3, "probability"),
+(4, "machine learning"), (4, "regression"), (4, "decision trees"),
+(4, "libsvm"), (5, "Python"), (5, "R"), (5, "Java"), (5, "C++"),
+(5, "Haskell"), (5, "programming languages"), (6, "statistics"),
+(6, "probability"), (6, "mathematics"), (6, "theory"),
+(7, "machine learning"), (7, "scikit-learn"), (7, "Mahout"),
+(7, "neural networks"), (8, "neural networks"), (8, "deep learning"),
+(8, "Big Data"), (8, "artificial intelligence"), (9, "Hadoop"),
+(9, "Java"), (9, "MapReduce"), (9, "Big Data")
+]
 
+#map interests with users
+InterestsOfUsers = {}
+for interest in interests:
+    if interest[0] in InterestsOfUsers.keys():
+        InterestsOfUsers[interest[0]].append(interest[1])
+    else:
+        InterestsOfUsers[interest[0]] = [interest[1]]
+
+print("Map Interests of Users:")
+print(InterestsOfUsers)
+print()
+
+#map users with interests
+UsersOfInterest = {}
+for interest in interests:
+    if interest[1] in UsersOfInterest.keys():
+        UsersOfInterest[interest[1]].append(interest[0])
+    else:
+        UsersOfInterest[interest[1]] = [interest[0]]
+        
+print("Map Users of Interest:")
+print(UsersOfInterest)
+print()
+
+#popular keywords
+keywords = {}
+for interest in interests:
+    thatInterest = interest[1].split()
+    for inter in thatInterest:
+        keywords[inter] = keywords.get(inter, 0)+1
+
+#sort in descending order
+thoseKeywords = sorted(keywords.items(), key = lambda kv:(kv[1], kv[0]))
+thoseKeywords.reverse()
+
+print("Popular Keywords")
+print(thoseKeywords)
+print()
